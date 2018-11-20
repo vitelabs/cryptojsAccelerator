@@ -2,7 +2,7 @@ import scryptsyWorker from './scryptsy.worker.js';
 import random from './random';
 //     pwdBuff, salt, +scryptParams.n, +scryptParams.r, +scryptParams.p, +scryptParams.keylen
 const w = new scryptsyWorker();
-function asyncScryptsy(...args) {
+export default function asyncScryptsy(...args) {
     const id=Date.now()+random();
     w.postMessage({
         cmd: 'scryptsy',
