@@ -12,6 +12,7 @@ self.addEventListener('message', (event) => {
 function exec(data) {
     switch (data.cmd) {
     case 'scryptsy':
+        data[1]=Buffer.from(data[1]);
         return scryptsy(...data.args);
     }
 }
