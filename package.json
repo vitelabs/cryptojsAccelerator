@@ -5,12 +5,13 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build":"webpack"
+    "build": "webpack"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "html-webpack-plugin": "^3.2.0",
+    "raw-loader": "^0.5.1",
     "scryptsy": "^2.0.0",
     "webpack-dev-server": "^3.1.9",
     "worker-loader": "^2.0.0"

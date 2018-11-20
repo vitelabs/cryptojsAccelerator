@@ -1,9 +1,9 @@
-import scryptsyWorker from './scryptsy.worker.js';
+import  scryptsyWorker from 'worker-loader?{"inline":true,"fallback":false}!./scryptsy.worker.js';
 import random from './random';
-//     pwdBuff, salt, +scryptParams.n, +scryptParams.r, +scryptParams.p, +scryptParams.keylen
-const w = new scryptsyWorker();
+
+const w =scryptsyWorker();
 export default function asyncScryptsy(...args) {
-    const id=Date.now()+random();
+    const id = Date.now() + random();
     w.postMessage({
         cmd: 'scryptsy',
         id: 'any',
@@ -16,20 +16,20 @@ export default function asyncScryptsy(...args) {
             rej(new Error('timeout'));
         }, timeout);
         w.addEventListener('message', (event) => {
-            if(event.data&&event.data.id&&event.data.id===id){
-            clearTimeout(timer)
-            const data = event.data;
-            res(data.result);
+            if (event.data && event.data.id && event.data.id === id) {
+                clearTimeout(timer)
+                const data = event.data;
+                res(data.result);
             }
 
         });
         w.addEventListener('error', function (e) {
-            if(event.data&&event.data.id&&event.data.id===id){
-                            clearTimeout(timer)
-            console.log([
-                'ERROR: Line ', e.lineno, ' in ', e.filename, ': ', e.message
-            ].join(''));
-            rej(e);
+            if (event.data && event.data.id && event.data.id === id) {
+                clearTimeout(timer)
+                console.log([
+                    'ERROR: Line ', e.lineno, ' in ', e.filename, ': ', e.message
+                ].join(''));
+                rej(e);
             }
         });
     });
