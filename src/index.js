@@ -2,7 +2,7 @@ import  scryptsyWorker from 'worker-loader?{"inline":true,"fallback":false}!./sc
 import random from './random';
 
 const w =scryptsyWorker();
-export default function asyncScryptsy(...args) {
+module.exports= function asyncScryptsy(...args) {
     const id = Date.now() + random();
     w.postMessage({
         cmd: 'scryptsy',
@@ -33,3 +33,4 @@ export default function asyncScryptsy(...args) {
         });
     });
 }
+module.exports.default = module.exports;

@@ -32,7 +32,7 @@ let webpackConfig = {
     //     }]
     // },
 
-    plugins,
+    // plugins,
     devServer: {
         quiet: false,
         host: '127.0.0.1',
