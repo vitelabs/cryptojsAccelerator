@@ -3,36 +3,51 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 let plugins = [
-    new HtmlWebpackPlugin({
-        title: 'Vite Wallet'
-    }),
 ];
+const target = process.env.vtarget || "lib";
+if (target === 'use') {
+    plugins.push(new HtmlWebpackPlugin({
+        title: 'Vite Wallet'
+    }))
+}
 // [TODO] vendor
 let webpackConfig = {
     // devtool: "source-map",
     // mode: 'development',
     entry: {
-        index: './src/index.js'
+        index: target === 'lib' ? './src/index.js' : './src/as.js'
     },
     output: {
-        path: path.resolve(__dirname, "./dist"),
+        path: path.resolve(__dirname, target === 'lib' ? "./dist" : "fff"),
         libraryTarget: 'umd',
-        library: 'vitecrypto',
-        umdNamedDefine: true
+        library: {
+            root: "vitecrypto",
+            amd: "vitecrypto",
+            commonjs: "vitecrypto"
+        }
     },
-    // module: {
-    //     rules: [{
-    //         test: /\*\.worker\.js/,
-    //         use: [{
-    //             loader:'raw-loader'
-    //         },{
-    //             loader: 'worker-loader',
-    //             options: { inline: true }
-    //         }]
-    //     }]
-    // },
+    module: {
+        rules: [{
+            test: /\.js$/,
+            exclude: /node_modules/,
+            use: {
+                loader: 'babel-loader',
+                options: {
+                    presets: ['@babel/preset-env']
+                }
+            }
+        },
+            {
+                test: /\*\.worker\.js/,
+                use: [{
+                    loader: 'worker-loader',
+                    options: {"inline":true,"fallback":false}
+                }]
+            }
+        ]
+    },
 
-    // plugins,
+    plugins,
     devServer: {
         quiet: false,
         host: '127.0.0.1',

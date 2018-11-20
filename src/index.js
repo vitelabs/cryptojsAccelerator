@@ -1,8 +1,8 @@
-import  scryptsyWorker from 'worker-loader?{"inline":true,"fallback":false}!./scryptsy.worker.js';
+import  scryptsyWorker from './scryptsy.worker.js';
 import random from './random';
 
 const w =scryptsyWorker();
-module.exports= function asyncScryptsy(...args) {
+function vitecrypto(...args) {
     const id = Date.now() + random();
     w.postMessage({
         cmd: 'scryptsy',
@@ -33,4 +33,4 @@ module.exports= function asyncScryptsy(...args) {
         });
     });
 }
-module.exports.default = module.exports;
+export default vitecrypto
