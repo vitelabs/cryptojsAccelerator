@@ -37,13 +37,13 @@ let webpackConfig = {
                 }
             }
         },
-            {
-                test: /\*\.worker\.js/,
-                use: [{
-                    loader: 'worker-loader',
-                    options: {"inline":true,"fallback":false}
-                }]
-            }
+            // {
+            //     test: /\*\.worker\.js/,
+            //     use: [{
+            //         loader: 'worker-loader',
+            //         options: {"inline":true,"fallback":false}
+            //     }]
+            // }
         ]
     },
 

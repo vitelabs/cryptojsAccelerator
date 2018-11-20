@@ -1,4 +1,4 @@
-import  scryptsyWorker from './scryptsy.worker.js';
+import  scryptsyWorker from 'worker-loader?{"inline":true,"fallback":false}!./scryptsy.worker.js';
 import random from './random';
 
 const w =scryptsyWorker();
