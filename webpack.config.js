@@ -1,6 +1,7 @@
 
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
 let plugins = [
     new HtmlWebpackPlugin({
         title: 'Vite Wallet'
@@ -9,9 +10,15 @@ let plugins = [
 // [TODO] vendor
 let webpackConfig = {
     // devtool: "source-map",
-    // mode:'development',
+    // mode: 'development',
     entry: {
         index: './src/index.js'
+    },
+    output: {
+        path: path.resolve(__dirname, "./dist"),
+        libraryTarget: 'umd',
+        library: 'vitecrypto',
+        umdNamedDefine: true
     },
     // module: {
     //     rules: [{

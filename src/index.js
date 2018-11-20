@@ -6,7 +6,6 @@ export default function asyncScryptsy(...args) {
     const id = Date.now() + random();
     w.postMessage({
         cmd: 'scryptsy',
-        id: 'any',
         args,
         id
     });
