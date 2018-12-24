@@ -12,7 +12,7 @@ function vitecrypto(...args) {
     const timeout = 60000;
     return new Promise((res, rej) => {
         const timer = setTimeout(() => {
-            rej(new Error('timeout'));
+            rej(new Error(`timeout:${timeout}`));
         }, timeout);
         w.addEventListener('message', (event) => {
             if (event.data && event.data.id && event.data.id === id) {
