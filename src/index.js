@@ -9,7 +9,7 @@ function vitecrypto(...args) {
         args,
         id
     });
-    const timeout = 30000;
+    const timeout = 60000;
     return new Promise((res, rej) => {
         const timer = setTimeout(() => {
             rej(new Error('timeout'));
