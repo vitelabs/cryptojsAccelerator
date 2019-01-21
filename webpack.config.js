@@ -27,26 +27,43 @@ let webpackConfig = {
         }
     },
     module: {
-        rules: [{
-            test: /\.js$/,
-            exclude: /node_modules/,
-            use: {
-                loader: 'babel-loader',
-                options: {
-                    presets: ['@babel/preset-env']
+        rules: [
+            {
+                test: /\*\.worker\.js/,
+                use: [{
+                    loader: 'worker-loader',
+                    options: { "inline": true, "fallback": false }
+                }]
+            }, {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env']
+                    }
+                }
+            },
+            {
+                test: /\.(c|cpp)$/,
+                use: {
+                    loader: 'cpp-wasm-loader',
+                    options: {
+                        // emccFlags: (existingFlags: string[], mode?: "wasm"|"asmjs" ) => string[],
+                        // emccPath: String,
+                        // fetchFiles: Boolean, 
+                        // memoryClass: Boolean,
+                        // asmJs: Boolean, 
+                        // wasm: Boolean,
+                        // fullEnv: Boolean
+                    }
                 }
             }
-        },
-            // {
-            //     test: /\*\.worker\.js/,
-            //     use: [{
-            //         loader: 'worker-loader',
-            //         options: {"inline":true,"fallback":false}
-            //     }]
-            // }
         ]
     },
-
+    resolve: {
+        extensions: ['.js', ".c", ".cpp", ".ts"]
+    },
     plugins,
     devServer: {
         quiet: false,
