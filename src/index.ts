@@ -1,0 +1,5 @@
+class cryptoSet{
+    constructor(){
+        
+    }
+}
